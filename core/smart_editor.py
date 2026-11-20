@@ -2,7 +2,10 @@ import subprocess
 import re
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
-import cv2
+try:
+    import cv2
+except ImportError:
+    cv2 = None
 from core.ffmpeg_utils import get_ffmpeg_path
 
 def detect_audio_silences(
@@ -39,6 +42,8 @@ def detect_audio_silences(
     return silences
 
 def check_visual_activity(video_path: Path, start_time: float, end_time: float, threshold_diff: float = 0.015) -> bool:
+    if cv2 is None:
+        return False
     cap = cv2.VideoCapture(str(video_path))
     if not cap.isOpened():
         return False
