@@ -1,0 +1,8 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+storage/
+.env
+cloud_deploy/
+.gitattributes
